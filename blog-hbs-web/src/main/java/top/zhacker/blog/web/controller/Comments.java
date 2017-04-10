@@ -1,5 +1,7 @@
 package top.zhacker.blog.web.controller;
 
+import com.google.common.base.Throwables;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import top.zhacker.blog.web.service.CommentServiceClient;
  *
  * 评论视图
  */
+@Slf4j
 @Controller
 @RequestMapping("/posts/{postId}/comments")
 public class Comments extends ViewBase {
@@ -36,19 +39,31 @@ public class Comments extends ViewBase {
                 .setContent(content)
                 .setAuthor(getCurrentUser())
                 .setAuthorId(getCurrentUserId());
-        commentService.createComment(comment);
 
-        attributes.addFlashAttribute("success", "comment.create.success");
-        return "redirect:/posts/"+postId;
+        try {
+            commentService.createComment(comment);
+
+            attributes.addFlashAttribute("success", "comment.create.success");
+            return "redirect:/posts/" + postId;
+        }catch (Exception e){
+            log.error("createComment fail, comment={}, cause={}", comment, Throwables.getStackTraceAsString(e));
+            attributes.addFlashAttribute("error", "create.comment.fail");
+            return "redirect:/posts/" + postId;
+        }
     }
 
     @RequestMapping(value = "/{commentId}/remove", method = RequestMethod.POST)
     public String removeComment(@PathVariable String commentId,
                                 @PathVariable String postId,
                                 RedirectAttributes attributes){
-
-        commentService.deleteComment(commentId, getCurrentUserId());
-        attributes.addFlashAttribute("success", "comment.remove.success");
-        return "redirect:/posts/"+postId;
+        try {
+            commentService.deleteComment(commentId, getCurrentUserId());
+            attributes.addFlashAttribute("success", "comment.remove.success");
+            return "redirect:/posts/" + postId;
+        }catch (Exception e){
+            log.error("removeComment fail, commentId={}, cause={}", commentId, Throwables.getStackTraceAsString(e));
+            attributes.addFlashAttribute("success", "comment.remove.fail");
+            return "redirect:/posts/" + postId;
+        }
     }
 }
