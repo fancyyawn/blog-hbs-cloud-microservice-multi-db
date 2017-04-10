@@ -34,7 +34,7 @@ public class CommentsApi {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Boolean deleteComment(@PathVariable String id, String operatorId){
+    public Boolean deleteComment(@PathVariable String id, @RequestParam String operatorId){
         return commentService.deleteCommentById(id, operatorId);
     }
 }

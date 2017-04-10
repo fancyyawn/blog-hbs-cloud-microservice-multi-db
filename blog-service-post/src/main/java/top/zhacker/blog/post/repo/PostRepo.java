@@ -16,5 +16,5 @@ import top.zhacker.blog.post.model.Post;
 @Repository
 public interface PostRepo extends PagingAndSortingRepository<Post, String> {
 
-    Page<Post> findByAuthorId(Long authorId, Pageable pageable);
+    Page<Post> findByAuthorId(String authorId, Pageable pageable);
 }

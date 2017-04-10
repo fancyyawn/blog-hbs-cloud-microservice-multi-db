@@ -1,8 +1,11 @@
-package top.zhacker.blog.post.dto;
+package top.zhacker.blog.web.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 import top.zhacker.blog.common.PagingCriteria;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * DATE: 17/1/5 上午10:05 <br>
@@ -17,7 +20,7 @@ public class PostPagingCriteria implements PagingCriteria {
 
     private Integer pageSize;
     private Integer pageNo;
-    private String authorId;
+    private Long authorId;
 
     public Integer getPageSize(){
         return pageSize==null? 10 : pageSize;
@@ -25,5 +28,13 @@ public class PostPagingCriteria implements PagingCriteria {
 
     public Integer getPageNo(){
         return pageNo==null? 0 : pageNo;
+    }
+
+    public Map<String, Object> toMap(){
+        Map<String, Object> map = new HashMap<>();
+        map.put("authorId", authorId);
+        map.put("pageSize", pageSize);
+        map.put("pageNo", pageNo);
+        return map;
     }
 }

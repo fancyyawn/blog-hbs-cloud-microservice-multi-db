@@ -1,8 +1,12 @@
-package top.zhacker.blog.post.dto;
+package top.zhacker.blog.web.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 import top.zhacker.blog.common.PagingCriteria;
+
+import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * DATE: 17/1/5 上午10:05 <br>
@@ -13,11 +17,13 @@ import top.zhacker.blog.common.PagingCriteria;
  */
 @Data
 @Accessors(chain = true)
-public class PostPagingCriteria implements PagingCriteria {
+public class CommentPagingCriteria implements PagingCriteria {
 
     private Integer pageSize;
     private Integer pageNo;
-    private String authorId;
+
+    @NotNull
+    private String postId;
 
     public Integer getPageSize(){
         return pageSize==null? 10 : pageSize;
@@ -25,5 +31,14 @@ public class PostPagingCriteria implements PagingCriteria {
 
     public Integer getPageNo(){
         return pageNo==null? 0 : pageNo;
+    }
+
+
+    public Map<String, Object> toMap(){
+        Map<String, Object> map = new HashMap<>();
+        map.put("postId", postId);
+        map.put("pageSize", pageSize);
+        map.put("pageNo", pageNo);
+        return map;
     }
 }
