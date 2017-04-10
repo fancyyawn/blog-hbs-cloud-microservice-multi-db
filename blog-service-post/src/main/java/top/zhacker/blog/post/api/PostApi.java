@@ -35,7 +35,7 @@ public class PostApi{
                               @RequestParam String operatorId){
         return postService.deletePostById(id, operatorId);
     }
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Boolean updatePost(@PathVariable String id,
                               @RequestParam String title,
                               @RequestParam String content,

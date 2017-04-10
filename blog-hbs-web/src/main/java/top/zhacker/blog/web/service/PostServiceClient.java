@@ -24,7 +24,7 @@ public interface PostServiceClient {
     Boolean deletePost(@PathVariable("id") String id, @RequestParam("operatorId") String operatorId);
 
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     Boolean updatePost(@PathVariable("id") String id,
                               @RequestParam("title") String title,
                               @RequestParam("content") String content,
