@@ -4,6 +4,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import top.zhacker.blog.common.Paging;
 import top.zhacker.blog.web.model.Comment;
+import top.zhacker.blog.web.service.fallback.CommentServiceFallbackFactory;
 
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * MAIL: hechengopen@gmail.com <br>
  * AUTHOR: zhacker
  */
-@FeignClient("blog-comment")
+@FeignClient(value = "blog-comment", fallbackFactory = CommentServiceFallbackFactory.class)
 @RequestMapping("/v1/blog/comments")
 public interface CommentServiceClient {
 

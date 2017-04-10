@@ -4,6 +4,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import top.zhacker.blog.common.Paging;
 import top.zhacker.blog.web.model.Post;
+import top.zhacker.blog.web.service.fallback.PostServiceFallbackFactory;
 
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * AUTHOR: zhacker
  */
 
-@FeignClient("blog-post")
+@FeignClient(value = "blog-post", fallbackFactory = PostServiceFallbackFactory.class)
 @RequestMapping("/v1/blog/posts")
 public interface PostServiceClient {
 
