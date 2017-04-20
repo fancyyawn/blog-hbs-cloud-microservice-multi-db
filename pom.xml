@@ -13,7 +13,8 @@
 		<module>blog-service-post</module>
 		<module>blog-service-comment</module>
 		<module>blog-discovery</module>
-	</modules>
+        <module>blog-zipkin-server</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>blog-hbs-cloud-microservice-multi-db</name>

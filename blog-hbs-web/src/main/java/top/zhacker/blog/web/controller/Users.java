@@ -38,7 +38,6 @@ public class Users {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(User user, BindingResult result,
                          RedirectAttributes attributes){
-
         if (result.hasErrors()) {
             return "user/signup";
         }

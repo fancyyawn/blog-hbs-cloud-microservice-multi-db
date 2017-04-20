@@ -29,7 +29,7 @@ public class BlogUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        log.info("user login, username={}", username);
         User resp =  userService.findUserByName(username);
         List<GrantedAuthority> gas = new ArrayList<>();
         gas.add(new SimpleGrantedAuthority("ROLE_USER"));
