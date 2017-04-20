@@ -1,9 +1,6 @@
 server:
   port: 9001
 
-spring:
-  application:
-    name: blog-user
 
 eureka:
   client:
